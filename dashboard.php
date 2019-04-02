@@ -41,12 +41,12 @@ include("auth.php");
 						  <li class='has-sub'><a href='#'><span>Sales</span></a>
 							<ul>
 							   <li><a href='salesview.php'><span>View Sales</span></a></li>
-							   <li class='last'><a href='sales2.php'><span>Add sales2</span></a></li>
+							   <li class='last'><a href='sales2.php'><span>Add sales</span></a></li>
 							</ul>
 						 </li>
 					  </ul>
 				   </li>
-				   <li><a href='updatepassword.php'><span>Change Pass</span></a></li>
+				   <li><a href='updatepassword.php'><span>Change Password</span></a></li>
 				   <li class='last'><a href='logout.php'><span>Logout</span></a></li>
 				</ul>
 			</div>

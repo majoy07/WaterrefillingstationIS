@@ -47,7 +47,7 @@ include("auth.php");
 						 </li>
 					  </ul>
 				   </li>
-				   <li><a href='#'><span>About</span></a></li>
+				   <li><a href='#'><span>Change Password</span></a></li>
 				   <li class='last'><a href='logout.php'><span>Logout</span></a></li>
 				</ul>
 			</div>

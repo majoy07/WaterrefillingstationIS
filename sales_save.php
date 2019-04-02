@@ -3,23 +3,33 @@
 	require('db.php');
 	include("auth.php");
 	$status = "";
-			if(isset($_GET['save'])){
+			if(isset($_POST['save'])){
 				
-				$customer_no = mysqli_real_escape_string($con, $_GET['customers']);
-				$sale = mysqli_real_escape_string($con, $_GET['sale']);
+				$customer_no = mysqli_real_escape_string($con, $_POST['customers']);
+				$sale = mysqli_real_escape_string($con, $_POST['sale']);
 						
-				$numberOfcheckbox = count($_GET['check']);
-				echo $numberOfcheckbox;
+				$numberOfcheckbox = count($_POST['check']);
+				
+				$number = count($_POST['quantity']);
 				
 				$i = 0;
-				while($i<$numberOfcheckbox){
+				$j=0;
+				
+				while($i<$number){
 					
-					$check = mysqli_real_escape_string($con, $_GET['check'][$i]);
-					$quantity = mysqli_real_escape_string($con, $_GET['quantity'][$i]);
-					$price = mysqli_real_escape_string($con, $_GET['price'][$i]);					
-					$sql = "INSERT INTO `sales_product` (`sales_id`, `product_id`, `Price`, `quantity`) VALUES ('$sale', '$check', '$price', '$quantity');";
-					mysqli_query($con, $sql);
-				$i++;
+					$quantity = mysqli_real_escape_string($con, $_POST['quantity'][$i]);
+					$price = mysqli_real_escape_string($con, $_POST['price'][$i]);			
+					
+					if(empty($quantity)){
+						$i++;
+					}else{
+						$check = mysqli_real_escape_string($con, $_POST['check'][$j]);
+						
+						$sql = "INSERT INTO `sales_product` (`sales_id`, `product_id`, `Price`, `quantity`) VALUES ($sale, '$check', $price, $quantity);";
+						mysqli_query($con, $sql);
+						$i++;
+						$j++;
+					}
 				}
 				
 				header("Location: salesview.php?id=$sales&no=$customer_no");

@@ -58,7 +58,7 @@
 						 </li>
 					  </ul>
 				   </li>
-				   <li><a href='#'><span>About</span></a></li>
+				   <li><a href='#'><span>Change Password</span></a></li>
 				   <li class='last'><a href='logout.php'><span>Logout</span></a></li>
 				</ul>
 			</div>
@@ -67,13 +67,25 @@
 		<h2><font face="Britannic Bold">View Records</font></h2>
 		<div style="width:900px;">
 				
-		<form action = "sales_save.php" method="GET">
+		<form action = "sales_save.php" method="POST">
 		<?php 
 		$customer = $_GET["no"];
 		$sale = $_GET["id"];
+		
+		$sel_query="Select * from customer WHERE customer_num = $customer;";
+			$result = mysqli_query($con,$sel_query);
+			
+			while($row = mysqli_fetch_assoc($result)) {
+			
+				
+
+				
+		
 		?>
 		
-		<input type="text" name="customers" id="customer" value=<?php echo $customer;?> readonly >
+		<input type="text" name="customers" id="customer" value=<?php echo $row["firstname"]; echo " "; echo $row["surname"];
+		
+		}?> readonly >
 		<input type="hidden" name="sale" id="customer" value=<?php echo $sale;?>  >
 		
 		
@@ -95,6 +107,7 @@
 			<tbody>
 		</div>
 				</center>
+				
 			<?php
 			$count=1;
 			$sel_query="Select * from Products";
@@ -108,8 +121,9 @@
                 echo "<td>".$row->Description."</td>"; 
                 echo "<td><input type='text' style='order: none; border-color: transparent;' name='price[]' id='checkbox' value='".$row->Price ."' readonly /></td>";
                 echo "<td coslpan ='5'>" . $row->Unit." </td>";
-                echo '<td> <input type="text" name="quantity[]" style="width:70px; height:30px"/> </td>';
-                 echo "<td><input type='checkbox' name='check[]' id='checkbox' value='".$row->Product_id ."'  /></td>";
+                echo '<td> <input type="text" name="quantity[]" id = "quantity" style="width:70px; height:30px"/> </td>';
+                echo "<td><input type='checkbox' name='check[]' id='checkbox' style='width:70px; height:30px' value='".$row->Product_id ."' /></td>";
+				
                 echo "</tr>";
             } ?>
 			
@@ -120,7 +134,6 @@
 		</div>	
 		
 	</form>
-
 	
 	
 </body>

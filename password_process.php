@@ -2,29 +2,29 @@
 
 	require('db.php');
 	include("auth.php");
-
-						$oldpassword = md5($_POST['oldpassword']);
-						$newpassword = md5($_POST['newpassword']);
-						$confirmnewpassword = md5($_POST['confirmnewpassword']);
+						$username = $_SESSION['username'];
+						$old = md5($_POST['old_password']);
+						$new = md5($_POST['new_password']);
+						$confirm = md5($_POST['confirm_password']);
 
 						
 
-						$sql = "SELECT user_pwd FROM users WHERE user_id = $user_id ;"; 
+						$sql = "SELECT pass FROM users WHERE username = $username ;"; 
 
-						$result = mysqli_query($conn, $sql);
+						$result = mysqli_query($con, $sql);
 						$resultCheck = mysqli_num_rows($result);
 						$row = mysqli_fetch_assoc($result);
-								$oldpassworddb = $row["user_pwd"];
-								echo $oldpassworddb."<br>";
-						
-								echo $oldpassword;
-								if ($oldpassword == $oldpassworddb)
+								$oldpassword = $row["pass"];
+								echo $oldpassword."<br>";
+					
+								if ($old == $oldpassword)
 								{
+									echo $old;
 									
-									if ($newpassword == $confirmnewpassword) {
+									if ($new == $confirm) {
 										# code...
-										$query = "UPDATE `users` SET `user_pwd` = '$newpassword' WHERE `users`.`user_id` = $user_id;"; 
-										$result = mysqli_query($conn,$query) ;
+										$query = "UPDATE `users` SET `pass` = '$new' WHERE `users`.`username` = $username;"; 
+										$result = mysqli_query($con,$query) ;
 
 										session_start();
 										session_unset();
